@@ -1,3 +1,18 @@
+# nuitka-project: --standalone
+# nuitka-project: --onefile
+# nuitka-project: --enable-plugin=tk-inter
+# nuitka-project: --include-package=requests
+# nuitka-project: --windows-console-mode=disable
+# nuitka-project: --windows-icon-from-ico=img/64x64.ico
+# nuitka-project: --include-data-file=img/64x64.ico=img/64x64.ico
+
+# nuitka-project: --windows-company-name=rinkulu
+# nuitka-project: --windows-product-name=spansh2edjp
+# nuitka-project: --windows-file-version=1.0.0.0
+# nuitka-project: --windows-product-version=1.0.0.0
+# nuitka-project: --windows-file-description=Spansh CSV to EDJP route converter
+# nuitka-project: --copyright=Copyright (c) 2026 rinkulu
+
 import csv
 import json
 import os
@@ -298,7 +313,7 @@ class FetcherThread(threading.Thread):
             "q": name,
         }
         headers = {
-            "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36 Edg/144.0.0.0"  # noqa
+            "user-agent": "spansh2edjp v1.0.0"
         }
         while True:
             self._log_cb(f"Fetching {name} ({current}/{total})...")
@@ -340,5 +355,6 @@ class FetcherThread(threading.Thread):
 app = tk.Tk()
 app.title("spansh2edjp")
 app.resizable(False, False)
+app.iconbitmap(Path(__file__).parent / "img" / "64x64.ico")
 MainFrame(app).pack(padx=5, pady=5, fill="both")
 app.mainloop()

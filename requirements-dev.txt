@@ -1,4 +1,5 @@
 flake8
 isort
+nuitka[onefile]
 
 -r requirements.txt

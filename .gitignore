@@ -12,6 +12,12 @@ __pycache__
 test*.*
 .python-version
 
+# Build garbage
+*.build
+*.dist
+*.onefile-build
+*.exe
+
 # Environment variables
 .env
 
