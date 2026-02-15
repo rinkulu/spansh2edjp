@@ -5,6 +5,8 @@ This README is also available in: [Русский](README-ru.md)
 Takes a route CSV file downloaded from Spansh and converts it into the EDJP route format. Simple as that.
 Suitable for Neutron and Galactic plotters.
 
+Note: currently only the Russian language is available for the interface. This may change in the near future if I ever decide to return to this one-time project.
+
 ### Interface
 ![App interface](img/interface.png)
 
