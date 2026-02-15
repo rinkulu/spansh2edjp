@@ -209,7 +209,7 @@ class MainFrame(ttk.Frame):
         status = self.status_var.set
         status("Reading input file...")
         reader = csv.reader(open(input_file, 'r', encoding='utf-8'))
-        reader.__next__()  # skip headers
+        neutron_nav = len(next(reader)) == 5  # also skips headers
         output = {
             "RouteWaypoints": [],
             "CurrentDestination": 0,
@@ -218,7 +218,7 @@ class MainFrame(ttk.Frame):
         current_x = 0
         status("Converting...")
         for row in reader:
-            name, distance = row[0], float(row[1])
+            name, distance, jumps = row[0], float(row[1]), (int(row[4]) if neutron_nav else 1)
             if current_x >= 0:
                 current_x -= distance
             else:
@@ -230,7 +230,7 @@ class MainFrame(ttk.Frame):
                     "x": current_x, "y": 0, "z": 0
                 },
                 "Notes": "",
-                "Jumps": 1
+                "Jumps": jumps
             })
         status("Writing to output file...")
         with open(output_file, 'w', encoding="utf-8") as f:
@@ -284,7 +284,7 @@ class FetcherThread(threading.Thread):
     def do_run(self):
         self._log_cb("Reading input file...")
         reader = csv.reader(open(self.input_file, 'r', encoding='utf-8'))
-        reader.__next__()  # skip headers
+        neutron_nav = len(next(reader)) == 5  # also skips headers
         data = list(reader)
         total = len(data)
         output = {
@@ -297,7 +297,8 @@ class FetcherThread(threading.Thread):
             if self._stop_event.is_set():
                 return
             name = row[0]
-            output["RouteWaypoints"].append(self.fetch_system(name, i, total))
+            jumps = int(row[4]) if neutron_nav else 1
+            output["RouteWaypoints"].append(self.fetch_system(name, jumps, i, total))
             self.sleep(1)
 
         self._log_cb("Writing to output file...")
@@ -307,7 +308,7 @@ class FetcherThread(threading.Thread):
         self._on_finish_cb()
 
 
-    def fetch_system(self, name: str, current: int, total: int) -> dict:
+    def fetch_system(self, name: str, jumps: int, current: int, total: int) -> dict:
         url = "https://spansh.co.uk/api/search"
         params = {
             "q": name,
@@ -348,7 +349,7 @@ class FetcherThread(threading.Thread):
                     "x": x, "y": y, "z": z
                 },
                 "Notes": "",
-                "Jumps": 1
+                "Jumps": jumps
             }
 
 
