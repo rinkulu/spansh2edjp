@@ -20,6 +20,3 @@ test*.*
 
 # Environment variables
 .env
-
-# Some other things
-*.png
