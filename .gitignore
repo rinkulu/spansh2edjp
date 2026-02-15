@@ -1,3 +1,19 @@
+# IDE garbage
+.vscode
+
+# Python garbage
 .venv
+__pycache__
+*.pyc
+*.pyo
+*.pyd
+
+# Development garbage
+test*.*
 .python-version
+
+# Environment variables
+.env
+
+# Some other things
 *.png

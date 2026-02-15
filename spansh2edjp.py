@@ -1,14 +1,15 @@
-from collections.abc import Callable
+import csv
+import json
+import os
+import threading
 import time
 import tkinter as tk
-from tkinter import ttk
-from tkinter import filedialog as fd
+from collections.abc import Callable
 from pathlib import Path
-import threading
-import os
-import csv
+from tkinter import filedialog as fd
+from tkinter import ttk
+
 import requests
-import json
 
 
 class ThreadExit(Exception):
