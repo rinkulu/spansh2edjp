@@ -63,7 +63,12 @@ class MainFrame(ttk.Frame):
         self.coords_frame = ttk.Frame(self)
         self.fetch_coords_var = tk.BooleanVar(value=True)
         self.fetch_coords_checkbox = ttk.Checkbutton(self.coords_frame, text="Запрашивать координаты", variable=self.fetch_coords_var)
-        self.fetch_coords_descr = ttk.Label(self.coords_frame, wraplength=600, text="При включении этой опции программа будет запрашивать игровой ID и координаты для каждой системы на маршруте со Spansh. Это займёт определённое время. Вы сможете прервать процесс в любой момент.\nПри отключении этой опции координаты будут эмулированы на основании расстояний между системами, однако некоторые фукции EDJP могут работать с таким маршрутом неправильно.")  # noqa
+        self.fetch_coords_descr = ttk.Label(self.coords_frame, wraplength=600, text=(
+            "При включении этой опции программа будет запрашивать игровой ID и координаты для каждой системы на маршруте со Spansh. "
+            "Это займёт определённое время. Вы сможете прервать процесс в любой момент.\n"
+            "При отключении этой опции будут сгенерированы подставные координаты на основании расстояний между системами, "
+            "однако некоторые функции EDJP могут работать некорректно с таким маршрутом."
+        ))
         self.fetch_coords_checkbox.grid(row=0, column=0, sticky="NWSE")
         self.fetch_coords_descr.grid(row=1, column=0, sticky="NWSE")
 
